@@ -1,0 +1,296 @@
+/* ID Card Design */
+.id-card {
+    width: 380px;
+    height: 220px;
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    border-radius: 8px;
+    padding: 0;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    overflow: hidden;
+    border: 1px solid #ddd;
+    font-family: 'Arial', sans-serif;
+}
+
+/* Card Header (Top Section) */
+.id-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 65px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    z-index: 1;
+}
+
+.card-header {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 15px;
+    height: 65px;
+}
+
+.card-logo {
+    height: 50px;
+    width: auto;
+    object-fit: contain;
+}
+
+.card-title {
+    color: white;
+    text-align: center;
+    flex: 1;
+    padding: 0 10px;
+}
+
+.card-title h4 {
+    font-size: 12px;
+    font-weight: 700;
+    margin: 0;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+.card-title p {
+    font-size: 10px;
+    margin: 2px 0 0 0;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+}
+
+/* Card Body (Information Section) */
+.card-body {
+    position: relative;
+    z-index: 1;
+    padding: 12px 15px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px 15px;
+    font-size: 12px;
+    background: white;
+    flex: 1;
+    overflow: hidden;
+}
+
+.card-field {
+    display: flex;
+    flex-direction: column;
+}
+
+.card-label {
+    font-weight: 700;
+    color: #667eea;
+    font-size: 9px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 2px;
+    line-height: 1;
+}
+
+.card-value {
+    color: #1a1a1a;
+    font-size: 11px;
+    font-weight: 600;
+    line-height: 1.2;
+    word-break: break-word;
+}
+
+/* ID Section */
+.card-id {
+    grid-column: 1 / -1;
+    text-align: center;
+    border-top: 1px dashed #ddd;
+    padding-top: 6px;
+    margin-top: 2px;
+}
+
+.card-id .card-label {
+    margin-bottom: 1px;
+}
+
+.card-id .card-value {
+    font-size: 13px;
+    font-weight: 700;
+    color: #667eea;
+    letter-spacing: 1px;
+    font-family: 'Courier New', monospace;
+}
+
+/* Back Side (Optional) */
+.id-card.back-side {
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+}
+
+.id-card.back-side::before {
+    background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
+}
+
+/* Card Security Elements */
+.card-watermark {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 60px;
+    color: rgba(102, 126, 234, 0.1);
+    font-weight: 700;
+    white-space: nowrap;
+    text-transform: uppercase;
+    pointer-events: none;
+    z-index: 0;
+}
+
+/* Responsive ID Card */
+@media (max-width: 480px) {
+    .id-card {
+        width: 100%;
+        max-width: 380px;
+        margin: 0 auto;
+    }
+}
+
+/* Print Styles */
+@media print {
+    .id-card {
+        margin: 0;
+        box-shadow: none;
+        page-break-inside: avoid;
+    }
+
+    /* Hide non-essential elements when printing */
+    .modal-header,
+    .modal-footer,
+    .download-btn,
+    .close-btn {
+        display: none !important;
+    }
+
+    .modal-body {
+        padding: 0;
+        background: white;
+    }
+
+    .id-card-container {
+        min-height: auto;
+        padding: 0;
+    }
+}
+
+/* Professional Card Details */
+.card-validity {
+    position: absolute;
+    bottom: 8px;
+    right: 10px;
+    font-size: 8px;
+    color: #999;
+    text-align: right;
+}
+
+.card-qr {
+    position: absolute;
+    bottom: 8px;
+    left: 10px;
+    width: 35px;
+    height: 35px;
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 2px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 8px;
+    color: #999;
+}
+
+/* Card Animation */
+@keyframes cardFlip {
+    0% {
+        transform: rotateY(0deg);
+    }
+    100% {
+        transform: rotateY(180deg);
+    }
+}
+
+.id-card.flip {
+    animation: cardFlip 0.6s ease-in-out;
+}
+
+/* Print Multiple Cards */
+.print-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+    gap: 20px;
+    padding: 20px;
+}
+
+@media print {
+    .print-container {
+        grid-template-columns: 1fr;
+    }
+
+    .id-card {
+        page-break-inside: avoid;
+        break-inside: avoid;
+    }
+}
+
+/* Download Button */
+.download-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--spacing-sm);
+    padding: 12px 30px;
+    background: var(--gradient-primary);
+    color: white;
+    border: none;
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    font-weight: var(--font-weight-semibold);
+    transition: all var(--transition-base);
+}
+
+.download-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lg);
+}
+
+.download-btn:active {
+    transform: translateY(0);
+}
+
+.download-btn svg {
+    width: 18px;
+    height: 18px;
+}
+
+/* Card Preview Container */
+.id-card-preview {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--spacing-lg);
+}
+
+.id-card-preview .id-card {
+    margin: 0 auto;
+}
+
+/* Dual Card Layout (Front & Back) */
+.id-card-dual {
+    display: flex;
+    gap: var(--spacing-xl);
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.id-card-dual .id-card {
+    flex: 0 1 380px;
+}

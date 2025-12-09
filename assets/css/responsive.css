@@ -1,0 +1,578 @@
+/* Responsive Design */
+
+/* Tablets (768px to 1024px) */
+@media (max-width: 1024px) {
+    .dashboard-container {
+        grid-template-columns: 1fr;
+    }
+
+    .dashboard-sidebar {
+        position: static;
+    }
+
+    .sidebar-nav {
+        flex-direction: row;
+        overflow-x: auto;
+        padding-bottom: var(--spacing-sm);
+    }
+
+    .sidebar-item {
+        flex-shrink: 0;
+    }
+
+    .form-row {
+        grid-template-columns: 1fr;
+    }
+
+    .table-wrapper {
+        font-size: var(--font-size-xs);
+    }
+
+    .students-table th,
+    .students-table td {
+        padding: var(--spacing-sm) var(--spacing-md);
+    }
+}
+
+/* Medium Tablets (768px to 980px) */
+@media (max-width: 980px) {
+    .header-container {
+        flex-wrap: wrap;
+        gap: var(--spacing-md);
+    }
+
+    .logo-section {
+        flex: 1 1 100%;
+    }
+
+    .user-section {
+        flex: 1 1 auto;
+    }
+
+    .action-btns {
+        flex-direction: column;
+    }
+
+    .btn-small {
+        width: 100%;
+        padding: 8px 10px;
+    }
+
+    .modal-content {
+        max-width: 90%;
+    }
+}
+
+/* Small Tablets (480px to 768px) */
+@media (max-width: 768px) {
+    /* General */
+    :root {
+        --font-size-base: 13px;
+    }
+
+    body {
+        padding-bottom: var(--spacing-lg);
+    }
+
+    /* Header */
+    .dashboard-header {
+        padding: var(--spacing-md);
+    }
+
+    .header-container {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: var(--spacing-md);
+    }
+
+    .logo-section {
+        width: 100%;
+    }
+
+    .header-logo {
+        height: 40px;
+    }
+
+    .header-title {
+        font-size: var(--font-size-lg);
+    }
+
+    .header-subtitle {
+        font-size: 11px;
+    }
+
+    .user-section {
+        width: 100%;
+        justify-content: space-between;
+    }
+
+    /* Sidebar */
+    .dashboard-sidebar {
+        display: flex;
+        flex-direction: row;
+        gap: var(--spacing-md);
+        overflow-x: auto;
+        padding: var(--spacing-md);
+    }
+
+    .sidebar-title {
+        display: none;
+    }
+
+    .sidebar-nav {
+        display: flex;
+        flex-direction: row;
+        gap: var(--spacing-sm);
+    }
+
+    .sidebar-item {
+        flex-shrink: 0;
+        padding: var(--spacing-sm) var(--spacing-md);
+        font-size: 12px;
+    }
+
+    .sidebar-stats {
+        display: none;
+    }
+
+    /* Content */
+    .dashboard-content {
+        padding: var(--spacing-md);
+    }
+
+    .tab-title {
+        font-size: var(--font-size-xl);
+    }
+
+    /* Forms */
+    .form-row {
+        grid-template-columns: 1fr;
+        gap: var(--spacing-md);
+    }
+
+    .form-group {
+        gap: var(--spacing-sm);
+    }
+
+    .form-input,
+    .form-select {
+        padding: 10px var(--spacing-md);
+        font-size: 16px; /* Prevent zoom on iOS */
+    }
+
+    .form-label {
+        font-size: 12px;
+    }
+
+    .form-actions {
+        flex-direction: column-reverse;
+        gap: var(--spacing-md);
+    }
+
+    .form-actions .btn {
+        width: 100%;
+    }
+
+    /* Tables */
+    .table-wrapper {
+        margin: -var(--spacing-md);
+        border-radius: 0;
+    }
+
+    .students-table th,
+    .students-table td {
+        padding: 10px var(--spacing-sm);
+        font-size: 12px;
+    }
+
+    .students-table th {
+        font-size: 11px;
+    }
+
+    .action-btns {
+        flex-direction: column;
+        gap: 4px;
+    }
+
+    .btn-small {
+        width: 100%;
+        padding: 6px var(--spacing-sm);
+        font-size: 11px;
+    }
+
+    /* Modal */
+    .modal-content {
+        width: 95%;
+        max-height: 85vh;
+    }
+
+    .modal-header,
+    .modal-body,
+    .modal-footer {
+        padding: var(--spacing-md);
+    }
+
+    .modal-title {
+        font-size: var(--font-size-lg);
+    }
+
+    .modal-footer {
+        flex-direction: column;
+    }
+
+    .modal-footer .btn {
+        width: 100%;
+    }
+
+    /* ID Card */
+    .id-card {
+        width: 100%;
+        max-width: 380px;
+        margin: 0 auto;
+    }
+
+    .id-card-container {
+        min-height: 300px;
+        padding: var(--spacing-md);
+    }
+
+    /* Buttons */
+    .btn-lg {
+        width: 100%;
+        padding: 12px var(--spacing-md);
+    }
+}
+
+/* Small Phones (360px to 480px) */
+@media (max-width: 480px) {
+    /* General */
+    :root {
+        --spacing-lg: 16px;
+        --spacing-md: 12px;
+        --spacing-sm: 6px;
+        --font-size-base: 12px;
+    }
+
+    /* Header */
+    .dashboard-header {
+        padding: var(--spacing-sm);
+        margin-bottom: var(--spacing-md);
+    }
+
+    .header-container {
+        flex-direction: column;
+        align-items: stretch;
+        gap: var(--spacing-sm);
+    }
+
+    .logo-section {
+        display: flex;
+        align-items: center;
+        gap: var(--spacing-sm);
+    }
+
+    .header-logo {
+        height: 35px;
+    }
+
+    .header-title {
+        font-size: var(--font-size-lg);
+        line-height: 1.2;
+    }
+
+    .header-subtitle {
+        font-size: 10px;
+    }
+
+    .user-section {
+        width: 100%;
+        justify-content: space-between;
+    }
+
+    .user-name {
+        font-size: 11px;
+    }
+
+    .logout-btn {
+        padding: 6px 10px;
+        font-size: 11px;
+        gap: 4px;
+    }
+
+    /* Dashboard Container */
+    .dashboard-container {
+        gap: var(--spacing-md);
+        padding: 0 var(--spacing-sm);
+    }
+
+    /* Sidebar */
+    .dashboard-sidebar {
+        display: flex;
+        flex-direction: row;
+        gap: var(--spacing-sm);
+        padding: var(--spacing-sm);
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        scroll-behavior: smooth;
+    }
+
+    .sidebar-item {
+        padding: 6px 10px;
+        font-size: 11px;
+        gap: 4px;
+    }
+
+    .sidebar-item svg {
+        width: 14px;
+        height: 14px;
+    }
+
+    /* Content */
+    .dashboard-content {
+        padding: var(--spacing-md);
+    }
+
+    .tab-header {
+        margin-bottom: var(--spacing-lg);
+    }
+
+    .tab-title {
+        font-size: var(--font-size-lg);
+    }
+
+    .tab-description {
+        font-size: 11px;
+    }
+
+    /* Forms */
+    .student-form {
+        gap: var(--spacing-md);
+    }
+
+    .form-row {
+        gap: var(--spacing-md);
+    }
+
+    .form-label {
+        font-size: 11px;
+        font-weight: 600;
+    }
+
+    .form-input,
+    .form-select {
+        padding: 10px var(--spacing-sm);
+        font-size: 14px; /* iOS zoom prevention */
+        border-radius: var(--radius-sm);
+    }
+
+    .form-input::placeholder {
+        font-size: 12px;
+    }
+
+    .form-select {
+        background-position: right 6px center;
+        background-size: 16px;
+        padding-right: 28px;
+    }
+
+    .form-help,
+    .form-error {
+        font-size: 10px;
+    }
+
+    .submit-btn,
+    .form-actions .btn {
+        padding: 10px var(--spacing-md);
+        font-size: 13px;
+    }
+
+    /* Tables */
+    .table-wrapper {
+        border-radius: var(--radius-md);
+        margin: -var(--spacing-md);
+        padding: var(--spacing-sm);
+    }
+
+    .students-table {
+        font-size: 11px;
+    }
+
+    .students-table th,
+    .students-table td {
+        padding: 8px var(--spacing-sm);
+        font-size: 10px;
+    }
+
+    .students-table th {
+        font-size: 9px;
+        font-weight: 700;
+    }
+
+    .action-btns {
+        gap: 3px;
+    }
+
+    .btn-small {
+        padding: 5px 6px;
+        font-size: 9px;
+        gap: 2px;
+    }
+
+    .btn-small svg {
+        width: 12px;
+        height: 12px;
+    }
+
+    /* Modal */
+    .modal-content {
+        width: 95%;
+        max-height: 90vh;
+        border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+        position: fixed;
+        bottom: 0;
+        left: 2.5%;
+        right: 2.5%;
+    }
+
+    .modal-header,
+    .modal-body,
+    .modal-footer {
+        padding: var(--spacing-md);
+    }
+
+    .modal-header {
+        padding: var(--spacing-md);
+    }
+
+    .modal-title {
+        font-size: var(--font-size-base);
+    }
+
+    .modal-close {
+        width: 28px;
+        height: 28px;
+        font-size: 24px;
+    }
+
+    .modal-body {
+        max-height: calc(90vh - 140px);
+        padding: var(--spacing-md);
+    }
+
+    .modal-footer {
+        flex-direction: column;
+        gap: var(--spacing-sm);
+        padding: var(--spacing-md);
+    }
+
+    .modal-footer .btn {
+        width: 100%;
+        padding: 10px var(--spacing-md);
+    }
+
+    /* ID Card */
+    .id-card {
+        width: 100%;
+        height: auto;
+        aspect-ratio: 16 / 9;
+        min-height: 150px;
+    }
+
+    .card-header {
+        padding: 6px 10px;
+        height: auto;
+        min-height: 50px;
+    }
+
+    .card-logo {
+        height: 35px;
+    }
+
+    .card-title h4 {
+        font-size: 10px;
+    }
+
+    .card-title p {
+        font-size: 8px;
+    }
+
+    .card-body {
+        padding: 8px 10px;
+        gap: 6px 10px;
+    }
+
+    .card-label {
+        font-size: 7px;
+    }
+
+    .card-value {
+        font-size: 9px;
+    }
+
+    .id-card-container {
+        min-height: auto;
+        padding: var(--spacing-md);
+    }
+
+    /* Login */
+    .login-box {
+        padding: var(--spacing-lg);
+        width: 100%;
+    }
+
+    .login-logo {
+        height: 60px;
+    }
+
+    .login-title {
+        font-size: var(--font-size-xl);
+    }
+
+    .login-subtitle {
+        font-size: 11px;
+    }
+
+    .login-hint {
+        font-size: 10px;
+    }
+}
+
+/* Landscape Mode */
+@media (orientation: landscape) and (max-height: 500px) {
+    .dashboard-header {
+        padding: var(--spacing-sm);
+    }
+
+    .dashboard-content {
+        padding: var(--spacing-md);
+    }
+
+    .modal-body {
+        max-height: calc(100vh - 180px);
+    }
+}
+
+/* Touch Device Optimizations */
+@media (hover: none) and (pointer: coarse) {
+    .btn-small,
+    .btn,
+    .sidebar-item {
+        padding: 10px 12px; /* Larger touch targets */
+    }
+
+    button {
+        -webkit-tap-highlight-color: transparent;
+    }
+}
+
+/* High DPI Screens */
+@media (min-resolution: 2dppx) {
+    .id-card {
+        box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+    }
+
+    .btn-primary,
+    .btn-secondary {
+        box-shadow: var(--shadow-lg);
+    }
+}

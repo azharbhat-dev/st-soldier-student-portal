@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Student ID Card Generator Dashboard">
+    <title>Student ID Card Generator - Dashboard</title>
+    
+    <link rel="stylesheet" href="assets/css/reset.css">
+    <link rel="stylesheet" href="assets/css/variables.css">
+    <link rel="stylesheet" href="assets/css/base.css">
+    <link rel="stylesheet" href="assets/css/dashboard.css">
+    <link rel="stylesheet" href="assets/css/forms.css">
+    <link rel="stylesheet" href="assets/css/tables.css">
+    <link rel="stylesheet" href="assets/css/modals.css">
+    <link rel="stylesheet" href="assets/css/id-card.css">
+    <link rel="stylesheet" href="assets/css/responsive.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="dashboard-header">
+        <div class="header-container">
+            <div class="logo-section">
+                <img src="https://stsoldiergroup.com/wp-content/uploads/2025/09/st-soldier-logo.png" 
+                     alt="St Soldier Logo" class="header-logo">
+                <div class="logo-text">
+                    <h1 class="header-title">Student ID Card Generator</h1>
+                    <p class="header-subtitle">St Soldier Group of Institutions</p>
+                </div>
+            </div>
+            <div class="user-section">
+                <span class="user-name" id="adminName">Admin</span>
+                <button class="logout-btn" id="logoutBtn">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+                        <polyline points="16 17 21 12 16 7"></polyline>
+                        <line x1="21" y1="12" x2="9" y2="12"></line>
+                    </svg>
+                    Logout
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+        <aside class="dashboard-sidebar">
+            <nav class="sidebar-nav">
+                <h3 class="sidebar-title">Menu</h3>
+                <div class="sidebar-item active" data-tab="addStudent">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M12 5v14M5 12h14"></path>
+                    </svg>
+                    <span>Add Student</span>
+                </div>
+                <div class="sidebar-item" data-tab="viewStudents">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                        <polyline points="9 22 9 12 15 12 15 22"></polyline>
+                    </svg>
+                    <span>View Students</span>
+                </div>
+            </nav>
+
+            <div class="sidebar-stats">
+                <div class="stat-box">
+                    <p class="stat-label">Total Students</p>
+                    <p class="stat-value" id="totalStudents">0</p>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="dashboard-content">
+            <!-- Success/Error Messages -->
+            <div class="alert alert-success hidden" id="successMsg" role="alert"></div>
+            <div class="alert alert-error hidden" id="errorMsg" role="alert"></div>
+
+            <!-- Add Student Tab -->
+            <section id="addStudentTab" class="content-tab">
+                <div class="tab-header">
+                    <h2 class="tab-title">Add New Student</h2>
+                    <p class="tab-description">Fill in the student details to create a new ID card</p>
+                </div>
+
+                <form id="studentForm" class="student-form">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="studentName" class="form-label">Student Name *</label>
+                            <input type="text" id="studentName" class="form-input" placeholder="Full Name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="fatherName" class="form-label">Father's Name *</label>
+                            <input type="text" id="fatherName" class="form-input" placeholder="Father Name" required>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="studentEmail" class="form-label">Email *</label>
+                            <input type="email" id="studentEmail" class="form-input" placeholder="Email Address" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="studentPhone" class="form-label">Phone *</label>
+                            <input type="tel" id="studentPhone" class="form-input" placeholder="Phone Number" required>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="course" class="form-label">Course *</label>
+                            <select id="course" class="form-select" required>
+                                <option value="">Select Course</option>
+                                <option value="B.Tech (Computer Science)">B.Tech (Computer Science)</option>
+                                <option value="B.Tech (Electronics)">B.Tech (Electronics)</option>
+                                <option value="B.Tech (Mechanical)">B.Tech (Mechanical)</option>
+                                <option value="B.Tech (Civil)">B.Tech (Civil)</option>
+                                <option value="B.Com">B.Com</option>
+                                <option value="B.A">B.A</option>
+                                <option value="B.Sc">B.Sc</option>
+                                <option value="LLB">LLB</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="semester" class="form-label">Semester *</label>
+                            <select id="semester" class="form-select" required>
+                                <option value="">Select Semester</option>
+                                <option value="1">1st Semester</option>
+                                <option value="2">2nd Semester</option>
+                                <option value="3">3rd Semester</option>
+                                <option value="4">4th Semester</option>
+                                <option value="5">5th Semester</option>
+                                <option value="6">6th Semester</option>
+                                <option value="7">7th Semester</option>
+                                <option value="8">8th Semester</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="rollNo" class="form-label">Roll Number *</label>
+                            <input type="text" id="rollNo" class="form-input" placeholder="Roll Number" required>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn-primary btn-lg">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M12 5v14M5 12h14"></path>
+                        </svg>
+                        Add Student
+                    </button>
+                </form>
+            </section>
+
+            <!-- View Students Tab -->
+            <section id="viewStudentsTab" class="content-tab hidden">
+                <div class="tab-header">
+                    <h2 class="tab-title">All Students</h2>
+                    <p class="tab-description">Manage and generate ID cards for students</p>
+                </div>
+
+                <div class="table-wrapper">
+                    <table class="students-table">
+                        <thead>
+                            <tr>
+                                <th>Student Name</th>
+                                <th>Roll Number</th>
+                                <th>Course</th>
+                                <th>Semester</th>
+                                <th>Student ID</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="studentsTableBody">
+                            <tr>
+                                <td colspan="6" class="empty-state">
+                                    <p>No students added yet</p>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- ID Card Modal -->
+    <div id="idCardModal" class="modal" role="dialog" aria-labelledby="modalTitle">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title" id="modalTitle">Student ID Card</h3>
+                <button class="modal-close" aria-label="Close">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="id-card-container">
+                    <div class="id-card" id="idCardPreview"></div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn-secondary" id="closeModalBtn">Close</button>
+                <button class="btn-primary" id="downloadCardBtn">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                        <polyline points="7 10 12 15 17 10"></polyline>
+                        <line x1="12" y1="15" x2="12" y2="3"></line>
+                    </svg>
+                    Download PDF
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Loading Spinner -->
+    <div id="loadingSpinner" class="loading-spinner hidden">
+        <div class="spinner"></div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="assets/js/config.js"></script>
+    <script src="assets/js/cache.js"></script>
+    <script src="assets/js/api.js"></script>
+    <script src="assets/js/utils.js"></script>
+    <script src="assets/js/auth.js"></script>
+    <script src="assets/js/ui.js"></script>
+    <script src="assets/js/students.js"></script>
+    <script src="assets/js/id-card.js"></script>
+
+    <script>
+        // Protect dashboard - must be logged in
+        if (!Auth.isAuthenticated()) {
+            window.location.href = 'login.html';
+        } else {
+            // Initialize dashboard
+            initDashboard();
+        }
+
+        function initDashboard() {
+            const user = Auth.getCurrentUser();
+            if (user) {
+                document.getElementById('adminName').textContent = user.username || 'Admin';
+            }
+
+            // Setup event listeners
+            setupEventListeners();
+            loadStudents();
+        }
+
+        function setupEventListeners() {
+            // Student form
+            document.getElementById('studentForm').addEventListener('submit', e => handleAddStudent(e));
+
+            // Sidebar navigation
+            document.querySelectorAll('.sidebar-item').forEach(item => {
+                item.addEventListener('click', () => {
+                    const tab = item.getAttribute('data-tab');
+                    switchTab(tab);
+                    if (tab === 'viewStudents') {
+                        loadStudents();
+                    }
+                });
+            });
+
+            // Logout
+            document.getElementById('logoutBtn').addEventListener('click', () => {
+                Auth.logout();
+                window.location.href = 'login.html';
+            });
+
+            // Modal controls
+            document.querySelectorAll('.modal-close').forEach(btn => {
+                btn.addEventListener('click', e => {
+                    const modal = e.target.closest('.modal');
+                    if (modal) closeModal(modal.id);
+                });
+            });
+
+            document.getElementById('closeModalBtn').addEventListener('click', () => closeModal('idCardModal'));
+            document.getElementById('downloadCardBtn').addEventListener('click', () => {
+                if (window.currentStudent) {
+                    IDCardManager.downloadCardPDF(window.currentStudent);
+                }
+            });
+
+            // Close modals on background click
+            document.getElementById('idCardModal').addEventListener('click', e => {
+                if (e.target.id === 'idCardModal') closeModal('idCardModal');
+            });
+
+            // Keyboard shortcuts
+            document.addEventListener('keydown', e => {
+                if (e.key === 'Escape') {
+                    closeModal('idCardModal');
+                }
+            });
+        }
+
+        function switchTab(tab) {
+            document.getElementById('addStudentTab').classList.add('hidden');
+            document.getElementById('viewStudentsTab').classList.add('hidden');
+            document.querySelectorAll('.sidebar-item').forEach(item => item.classList.remove('active'));
+
+            if (tab === 'addStudent') {
+                document.getElementById('addStudentTab').classList.remove('hidden');
+                document.querySelectorAll('.sidebar-item')[0].classList.add('active');
+            } else if (tab === 'viewStudents') {
+                document.getElementById('viewStudentsTab').classList.remove('hidden');
+                document.querySelectorAll('.sidebar-item')[1].classList.add('active');
+            }
+        }
+
+        async function handleAddStudent(e) {
+            e.preventDefault();
+
+            const studentData = {
+                name: document.getElementById('studentName').value.trim(),
+                fatherName: document.getElementById('fatherName').value.trim(),
+                email: document.getElementById('studentEmail').value.trim().toLowerCase(),
+                phone: document.getElementById('studentPhone').value.trim(),
+                course: document.getElementById('course').value,
+                semester: document.getElementById('semester').value,
+                rollNo: document.getElementById('rollNo').value.trim().toUpperCase(),
+            };
+
+            try {
+                const response = await StudentManager.addStudent(studentData);
+                if (response.success) {
+                    e.target.reset();
+                    setTimeout(() => {
+                        switchTab('viewStudents');
+                        loadStudents();
+                    }, 1500);
+                }
+            } catch (error) {
+                console.error('Error adding student:', error);
+            }
+        }
+
+        async function loadStudents() {
+            try {
+                const students = await StudentManager.loadStudents();
+                renderStudentsTable(students);
+                document.getElementById('totalStudents').textContent = students.length.toString();
+            } catch (error) {
+                console.error('Error loading students:', error);
+            }
+        }
+
+        function renderStudentsTable(students) {
+            const tbody = document.getElementById('studentsTableBody');
+
+            if (students.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="6" class="empty-state"><p>No students added yet</p></td></tr>';
+                return;
+            }
+
+            const sorted = StudentManager.sortStudents(students, 'createdAt', 'desc');
+            tbody.innerHTML = sorted.map(student => `
+                <tr>
+                    <td>${student.name}</td>
+                    <td>${student.rollNo}</td>
+                    <td>${student.course}</td>
+                    <td>${student.semester}</td>
+                    <td><strong>${student.id}</strong></td>
+                    <td>
+                        <div class="action-btns">
+                            <button class="btn-small btn-generate" onclick="generateIDCard('${student.id}', '${student.name}', '${student.rollNo}', '${student.course}', '${student.semester}')">Generate</button>
+                            <button class="btn-small btn-delete" onclick="deleteStudent('${student.id}')">Delete</button>
+                        </div>
+                    </td>
+                </tr>
+            `).join('');
+        }
+
+        function generateIDCard(id, name, rollNo, course, semester) {
+            window.currentStudent = { id, name, rollNo, course, semester };
+            const cardHTML = `
+                <div class="id-card">
+                    <div class="card-header">
+                        <img src="https://stsoldiergroup.com/wp-content/uploads/2025/09/st-soldier-logo.png" alt="Logo" class="card-logo">
+                        <div class="card-title">
+                            <h4>ST SOLDIER GROUP</h4>
+                            <p>STUDENT ID CARD</p>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="card-field">
+                            <span class="card-label">Name</span>
+                            <span class="card-value">${name}</span>
+                        </div>
+                        <div class="card-field">
+                            <span class="card-label">Roll No</span>
+                            <span class="card-value">${rollNo}</span>
+                        </div>
+                        <div class="card-field">
+                            <span class="card-label">Course</span>
+                            <span class="card-value">${course}</span>
+                        </div>
+                        <div class="card-field">
+                            <span class="card-label">Semester</span>
+                            <span class="card-value">${semester}</span>
+                        </div>
+                        <div class="card-id">
+                            <div class="card-label">Student ID</div>
+                            <div class="card-value">${id}</div>
+                        </div>
+                    </div>
+                </div>
+            `;
+            document.getElementById('idCardPreview').innerHTML = cardHTML;
+            openModal('idCardModal');
+        }
+
+        function deleteStudent(studentId) {
+            if (confirm('Are you sure you want to delete this student?')) {
+                StudentManager.deleteStudent(studentId).then(() => loadStudents());
+            }
+        }
+
+        function openModal(modalId) {
+            document.getElementById(modalId).classList.add('show');
+        }
+
+        function closeModal(modalId) {
+            document.getElementById(modalId).classList.remove('show');
+        }
+    </script>
+</body>
+</html>

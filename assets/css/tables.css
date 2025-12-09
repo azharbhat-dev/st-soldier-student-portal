@@ -1,0 +1,192 @@
+/* Tables */
+.table-wrapper {
+    overflow-x: auto;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-sm);
+}
+
+.students-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 0;
+}
+
+.students-table thead {
+    background: var(--bg-secondary);
+    border-bottom: 2px solid var(--primary-color);
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+.students-table th {
+    padding: var(--spacing-md) var(--spacing-lg);
+    text-align: left;
+    color: var(--text-primary);
+    font-weight: var(--font-weight-bold);
+    font-size: var(--font-size-sm);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.students-table tbody tr {
+    border-bottom: 1px solid var(--border-light);
+    transition: all var(--transition-base);
+}
+
+.students-table tbody tr:hover {
+    background: var(--bg-secondary);
+}
+
+.students-table tbody tr:last-child {
+    border-bottom: none;
+}
+
+.students-table td {
+    padding: var(--spacing-md) var(--spacing-lg);
+    color: var(--text-secondary);
+    font-size: var(--font-size-sm);
+}
+
+.students-table td strong {
+    color: var(--primary-color);
+    font-weight: var(--font-weight-bold);
+}
+
+/* Empty State */
+.empty-state {
+    text-align: center;
+    padding: var(--spacing-2xl) var(--spacing-lg) !important;
+    color: var(--text-tertiary);
+}
+
+.empty-state p {
+    font-size: var(--font-size-base);
+    margin: 0;
+}
+
+/* Action Buttons */
+.action-btns {
+    display: flex;
+    gap: var(--spacing-sm);
+}
+
+.btn-small {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    padding: 6px 10px;
+    border: none;
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-semibold);
+    transition: all var(--transition-base);
+    white-space: nowrap;
+}
+
+.btn-generate {
+    background: var(--success-color);
+    color: white;
+}
+
+.btn-generate:hover {
+    background: var(--success-dark);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+}
+
+.btn-edit {
+    background: var(--info-color);
+    color: white;
+}
+
+.btn-edit:hover {
+    background: #2980b9;
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+}
+
+.btn-delete {
+    background: var(--error-color);
+    color: white;
+}
+
+.btn-delete:hover {
+    background: var(--error-dark);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+}
+
+.btn-view {
+    background: #9b59b6;
+    color: white;
+}
+
+.btn-view:hover {
+    background: #8e44ad;
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+}
+
+.btn-small svg {
+    width: 14px;
+    height: 14px;
+}
+
+/* Table Responsive */
+@media (max-width: 768px) {
+    .table-wrapper {
+        font-size: var(--font-size-xs);
+    }
+
+    .students-table th,
+    .students-table td {
+        padding: var(--spacing-sm) var(--spacing-md);
+        font-size: var(--font-size-xs);
+    }
+
+    .students-table th {
+        font-size: var(--font-size-xs);
+    }
+
+    .action-btns {
+        flex-direction: column;
+    }
+
+    .btn-small {
+        width: 100%;
+        padding: 6px 8px;
+        font-size: 10px;
+    }
+}
+
+/* Animated Row */
+@keyframes rowEnter {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.students-table tbody tr {
+    animation: rowEnter 0.3s ease-out;
+}
+
+/* Loading State */
+.table-loading {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--spacing-2xl);
+    color: var(--text-tertiary);
+}
+
+.table-loading .spinner {
+    margin-right: var(--spacing-md);
+}
