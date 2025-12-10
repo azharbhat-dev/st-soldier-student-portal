@@ -1,0 +1,735 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Student ID Card Viewer">
+    <title>Student ID Card - St Soldier Group</title>
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #2d5016;
+            --primary-dark: #1a3009;
+            --secondary: #f4a61a;
+            --accent: #e8702f;
+            --text: #1a1a1a;
+            --text-light: #666;
+            --text-lighter: #999;
+            --border: #e0e0e0;
+            --bg: #ffffff;
+            --bg-light: #f8f9fa;
+        }
+
+        html, body {
+            width: 100%;
+            height: 100%;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #2d5016 0%, #1a3009 100%);
+            min-height: 100vh;
+            padding: 40px 20px;
+            overflow-y: auto;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            animation: fadeIn 0.6s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* Logo Section */
+        .logo-section {
+            text-align: center;
+            margin-bottom: 50px;
+            animation: slideDown 0.6s ease-out;
+        }
+
+        .logo-img {
+            max-width: 150px;
+            max-height: 150px;
+            width: auto;
+            height: auto;
+            margin-bottom: 20px;
+            object-fit: contain;
+        }
+
+        .logo-section h1 {
+            font-size: 32px;
+            color: white;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .logo-section p {
+            font-size: 16px;
+            color: #f4a61a;
+            font-weight: 600;
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Main Layout */
+        .main-content {
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            gap: 40px;
+            margin-bottom: 50px;
+        }
+
+        /* Card Display Section */
+        .card-section {
+            background: white;
+            border-radius: 15px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            animation: slideUp 0.6s ease-out 0.1s both;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .section-title {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid var(--secondary);
+        }
+
+        .section-title svg {
+            width: 24px;
+            height: 24px;
+        }
+
+        /* ID Card Display - MAIN FOCUS */
+        .card-display {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 350px;
+            background: linear-gradient(135deg, #f5f5f5 0%, #fff 100%);
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 30px;
+            border: 2px solid #e0e0e0;
+        }
+
+        /* ID Card - PERFECTLY VISIBLE */
+        .id-card {
+            width: 100%;
+            max-width: 420px;
+            height: 240px;
+            background: linear-gradient(135deg, #ffffff 0%, #f5f5f5 100%);
+            border: 2px solid var(--primary);
+            border-radius: 12px;
+            box-shadow: 0 15px 40px rgba(45, 80, 22, 0.25);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            animation: scaleIn 0.4s ease-out;
+            font-family: 'Segoe UI', sans-serif;
+        }
+
+        @keyframes scaleIn {
+            from {
+                opacity: 0;
+                transform: scale(0.95);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        /* Green Header */
+        .id-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 80px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            z-index: 1;
+        }
+
+        /* Golden Stripe */
+        .id-card::after {
+            content: '';
+            position: absolute;
+            top: 80px;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(90deg, var(--secondary) 0%, var(--accent) 100%);
+            z-index: 1;
+        }
+
+        .card-header {
+            position: relative;
+            z-index: 2;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 18px;
+            height: 80px;
+            gap: 15px;
+        }
+
+        .card-logo {
+            height: 65px;
+            width: auto;
+            object-fit: contain;
+            filter: brightness(1.05) drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
+        }
+
+        .card-title {
+            color: white;
+            text-align: center;
+            flex: 1;
+        }
+
+        .card-title h4 {
+            font-size: 14px;
+            font-weight: 700;
+            margin: 0;
+            letter-spacing: 1.2px;
+            text-transform: uppercase;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .card-title p {
+            font-size: 10px;
+            margin: 3px 0 0 0;
+            font-weight: 500;
+            color: #f4a61a;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+        }
+
+        .card-body {
+            position: relative;
+            z-index: 1;
+            padding: 16px 18px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px 16px;
+            background: white;
+            flex: 1;
+            overflow: hidden;
+        }
+
+        .card-field {
+            display: flex;
+            flex-direction: column;
+            gap: 3px;
+        }
+
+        .card-label {
+            font-weight: 700;
+            color: var(--primary);
+            font-size: 9px;
+            text-transform: uppercase;
+            letter-spacing: 0.6px;
+            line-height: 1;
+        }
+
+        .card-value {
+            color: #1a1a1a;
+            font-size: 11px;
+            font-weight: 600;
+            line-height: 1.3;
+            word-break: break-word;
+        }
+
+        /* Full Width ID Section */
+        .card-id {
+            grid-column: 1 / -1;
+            text-align: center;
+            border-top: 1px dashed var(--primary);
+            padding-top: 8px;
+            margin-top: 4px;
+        }
+
+        .card-id .card-label {
+            margin-bottom: 2px;
+            color: #f4a61a;
+        }
+
+        .card-id .card-value {
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--primary);
+            letter-spacing: 1px;
+            font-family: 'Courier New', monospace;
+        }
+
+        /* Input Section */
+        .input-section {
+            animation: slideUp 0.6s ease-out 0.2s both;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        .form-label {
+            display: block;
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 13px 16px;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-size: 15px;
+            font-family: inherit;
+            transition: all 0.3s ease;
+            background: #f8faf5;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: var(--primary);
+            background: white;
+            box-shadow: 0 0 0 4px rgba(45, 80, 22, 0.1);
+        }
+
+        .form-input::placeholder {
+            color: #ccc;
+        }
+
+        /* Buttons */
+        .btn-group {
+            display: flex;
+            gap: 12px;
+            margin-top: 25px;
+        }
+
+        .btn {
+            flex: 1;
+            padding: 13px 20px;
+            border: none;
+            border-radius: 10px;
+            font-weight: 600;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(45, 80, 22, 0.3);
+        }
+
+        .btn-primary:active {
+            transform: translateY(0);
+        }
+
+        .btn-secondary {
+            background: var(--bg-light);
+            color: var(--text);
+            border: 2px solid #e0e0e0;
+        }
+
+        .btn-secondary:hover {
+            background: #e0e0e0;
+            border-color: var(--primary);
+        }
+
+        .btn svg {
+            width: 16px;
+            height: 16px;
+        }
+
+        /* Loading & Error States */
+        .card-loading,
+        .error-state {
+            text-align: center;
+            padding: 60px 40px;
+            color: var(--text-lighter);
+        }
+
+        .spinner {
+            width: 50px;
+            height: 50px;
+            border: 4px solid #e0e0e0;
+            border-top-color: var(--primary);
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+            margin: 0 auto 20px;
+        }
+
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .loading-text,
+        .error-text {
+            font-size: 16px;
+            font-weight: 500;
+        }
+
+        .error-icon {
+            font-size: 48px;
+            margin-bottom: 15px;
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            color: white;
+            font-size: 13px;
+            opacity: 0.8;
+            margin-top: 60px;
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .main-content {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+
+            .card-display {
+                min-height: 320px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding: 20px 15px;
+            }
+
+            .container {
+                max-width: 100%;
+            }
+
+            .logo-section {
+                margin-bottom: 35px;
+            }
+
+            .logo-img {
+                width: 80px;
+                height: 80px;
+                margin-bottom: 15px;
+            }
+
+            .logo-section h1 {
+                font-size: 24px;
+            }
+
+            .logo-section p {
+                font-size: 14px;
+            }
+
+            .card-section {
+                padding: 25px;
+            }
+
+            .section-title {
+                font-size: 18px;
+                margin-bottom: 20px;
+            }
+
+            .card-display {
+                min-height: 280px;
+                padding: 20px;
+                margin-bottom: 20px;
+            }
+
+            .id-card {
+                max-width: 100%;
+            }
+
+            .btn-group {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .btn {
+                width: 100%;
+                padding: 12px 18px;
+            }
+
+            .form-group {
+                margin-bottom: 20px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            body {
+                padding: 15px 12px;
+            }
+
+            .logo-img {
+                width: 70px;
+                height: 70px;
+                margin-bottom: 12px;
+            }
+
+            .logo-section h1 {
+                font-size: 20px;
+            }
+
+            .card-section {
+                padding: 18px;
+            }
+
+            .section-title {
+                font-size: 16px;
+                margin-bottom: 18px;
+            }
+
+            .card-display {
+                min-height: 250px;
+                padding: 15px;
+                margin-bottom: 15px;
+            }
+
+            .id-card {
+                height: 220px;
+            }
+
+            .card-header {
+                padding: 8px 14px;
+                height: 70px;
+                gap: 10px;
+            }
+
+            .card-logo {
+                height: 55px;
+            }
+
+            .card-title h4 {
+                font-size: 12px;
+            }
+
+            .card-title p {
+                font-size: 9px;
+            }
+
+            .card-body {
+                padding: 12px 14px;
+                gap: 10px 12px;
+            }
+
+            .card-label {
+                font-size: 8px;
+            }
+
+            .card-value {
+                font-size: 10px;
+            }
+
+            .form-input {
+                padding: 12px 14px;
+                font-size: 16px;
+            }
+
+            .btn {
+                padding: 11px 16px;
+                font-size: 13px;
+            }
+
+            .form-group {
+                margin-bottom: 18px;
+            }
+        }
+
+        @media print {
+            body {
+                background: white;
+                padding: 0;
+            }
+
+            .logo-section,
+            .card-section:nth-child(2),
+            .footer {
+                display: none;
+            }
+
+            .main-content {
+                display: block;
+                margin: 0;
+            }
+
+            .card-section {
+                box-shadow: none;
+                padding: 0;
+                background: none;
+            }
+
+            .card-display {
+                background: transparent;
+                min-height: auto;
+                padding: 0;
+                border: none;
+            }
+
+            .id-card {
+                box-shadow: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Logo Section -->
+        <div class="logo-section">
+            <img src="../assets/images/logo.png" 
+                 alt="St Soldier Group Logo" class="logo-img" loading="eager">
+            <h1>Student ID Card</h1>
+            <p>St Soldier Group of Institutions</p>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- Card Display -->
+            <div class="card-section">
+                <h2 class="section-title">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect>
+                        <path d="M16 5V3a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"></path>
+                    </svg>
+                    Your ID Card
+                </h2>
+
+                <div class="card-display" id="cardDisplay">
+                    <div class="card-loading">
+                        <div class="spinner"></div>
+                        <div class="loading-text">Enter a student ID to view card</div>
+                    </div>
+                </div>
+
+                <div class="btn-group" id="actionButtons" style="display: none;">
+                    <button class="btn btn-secondary" onclick="studentCardApp.printCard()">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="6 9 6 2 18 2 18 9"></polyline>
+                            <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path>
+                        </svg>
+                        Print
+                    </button>
+                    <button class="btn btn-primary" onclick="studentCardApp.downloadCard()">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                            <polyline points="7 10 12 15 17 10"></polyline>
+                            <line x1="12" y1="15" x2="12" y2="3"></line>
+                        </svg>
+                        Download PDF
+                    </button>
+                </div>
+            </div>
+
+            <!-- Input Section -->
+            <div class="card-section input-section">
+                <h2 class="section-title">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="1"></circle>
+                        <path d="M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z"></path>
+                    </svg>
+                    Find Your Card
+                </h2>
+
+                <div class="form-group">
+                    <label class="form-label">Student ID</label>
+                    <input 
+                        type="text" 
+                        id="studentIdInput" 
+                        class="form-input"
+                        placeholder="Enter your student ID"
+                        autocomplete="off">
+                </div>
+
+                <div class="btn-group">
+                    <button class="btn btn-primary" onclick="studentCardApp.loadCard()">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                            <polyline points="17 8 12 3 7 8"></polyline>
+                            <line x1="12" y1="3" x2="12" y2="15"></line>
+                        </svg>
+                        Load Card
+                    </button>
+                    <button class="btn btn-secondary" onclick="studentCardApp.clearCard()">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="3 6 5 4 21 4 23 6 23 20a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V6"></polyline>
+                            <line x1="19" y1="4" x2="5" y2="20"></line>
+                        </svg>
+                        Clear
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            <p>St Soldier Group of Institutions © 2025. All rights reserved.</p>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="../assets/js/config.js"></script>
+    <script src="../assets/js/cache.js"></script>
+    <script src="../assets/js/utils.js"></script>
+    <script src="../assets/js/pdf-download-util.js"></script>
+    <script src="../assets/js/student-card.js"></script>
+    <script>
+        // Initialize app when page loads
+        document.addEventListener('DOMContentLoaded', () => {
+            studentCardApp.init();
+        });
+    </script>
+</body>
+</html>

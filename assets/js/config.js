@@ -8,7 +8,7 @@ const CONFIG = {
     API: {
         // Replace with your Google Apps Script deployment URL
         // Format: https://script.google.com/macros/d/{SCRIPT_ID}/usercopy
-        BASE_URL: 'https://script.google.com/macros/s/AKfycby_3IeMiutos2gZq8IKH0bapOlDcm6mwt0qPg9YaNAuhBzEudKy_xEERR-36gSj-psh/exec',
+        BASE_URL: 'https://script.google.com/macros/s/AKfycbyPvrO7ef_h_lo9tivzotIX2L3SiQN4kWPpZgyIzfxNeADGnVZxLb-RGG72ySydIBJF/exec',
         TIMEOUT: 30000, // 30 seconds
     },
 
