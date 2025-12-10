@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Login - St Soldier Group</title>
+    <link rel="stylesheet" href="assets/css/login.css">
+</head>
+<body>
+    <div class="login-container">
+        <!-- Left Side - Premium Design -->
+        <div class="login-left">
+            <div class="left-content">
+                <div class="premium-heading">
+                    <h1>Student ID Card<br><span class="gradient-text">Generator</span></h1>
+                    <p>Manage your institution's digital identity with ease and security</p>
+                </div>
+
+                <div class="premium-stats">
+                    <div class="stat">
+                        <div class="stat-number">50K+</div>
+                        <div class="stat-label">Cards Generated</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-number">200+</div>
+                        <div class="stat-label">Institutions</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-number">99.9%</div>
+                        <div class="stat-label">Uptime</div>
+                    </div>
+                </div>
+
+                <div class="premium-features">
+                    <div class="premium-feature">
+                        <div class="feature-icon">🔒</div>
+                        <div>
+                            <h3>Secure</h3>
+                            <p>Enterprise-grade security for your data</p>
+                        </div>
+                    </div>
+
+                    <div class="premium-feature">
+                        <div class="feature-icon">✨</div>
+                        <div>
+                            <h3>Professional</h3>
+                            <p>Beautiful card designs in minutes</p>
+                        </div>
+                    </div>
+
+                    <div class="premium-feature">
+                        <div class="feature-icon">⚡</div>
+                        <div>
+                            <h3>Fast & Easy</h3>
+                            <p>Intuitive interface for quick management</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Decorative Elements -->
+            <div class="decoration decoration-1"></div>
+            <div class="decoration decoration-2"></div>
+            <div class="decoration decoration-3"></div>
+        </div>
+
+        <!-- Right Side - Clean Login Form -->
+        <div class="login-right">
+            <div class="form-wrapper">
+                <div class="form-header">
+                    <h2>Welcome Back</h2>
+                    <p>Sign in to your admin account</p>
+                </div>
+
+                <form id="loginForm" class="login-form">
+                    <div class="error-alert" id="errorAlert" style="display: none;"></div>
+
+                    <div class="form-group">
+                        <label for="username">Username</label>
+                        <input 
+                            type="text" 
+                            id="username" 
+                            placeholder="admin"
+                            autocomplete="off"
+                            required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <div class="password-wrapper">
+                            <input 
+                                type="password" 
+                                id="password" 
+                                placeholder="••••••••"
+                                autocomplete="off"
+                                required>
+                            <button type="button" class="toggle-password" id="togglePassword">
+                                👁️
+                            </button>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="login-btn" id="loginBtn">
+                        <span>Sign In</span>
+                    </button>
+                </form>
+
+                <div class="demo-box">
+                    <p><strong>Demo:</strong> admin / admin123</p>
+                </div>
+
+                <div class="form-footer">
+                    <p>© 2025 St Soldier Group. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="assets/js/config.js"></script>
+    <script src="assets/js/cache.js"></script>
+    <script src="assets/js/utils.js"></script>
+    <script src="assets/js/auth.js"></script>
+
+    <script>
+        // Redirect if already logged in
+        if (Auth && Auth.isAuthenticated && Auth.isAuthenticated()) {
+            window.location.href = 'dashboard.html';
+        }
+
+        const loginForm = document.getElementById('loginForm');
+        const loginBtn = document.getElementById('loginBtn');
+        const usernameInput = document.getElementById('username');
+        const passwordInput = document.getElementById('password');
+        const togglePassword = document.getElementById('togglePassword');
+        const errorAlert = document.getElementById('errorAlert');
+
+        // Toggle password visibility
+        togglePassword.addEventListener('click', function(e) {
+            e.preventDefault();
+            const type = passwordInput.type === 'password' ? 'text' : 'password';
+            passwordInput.type = type;
+            togglePassword.textContent = type === 'password' ? '👁️' : '🙈';
+        });
+
+        // Handle login
+        loginForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const username = usernameInput.value.trim();
+            const password = passwordInput.value.trim();
+
+            errorAlert.style.display = 'none';
+            errorAlert.textContent = '';
+
+            if (!username || !password) {
+                showError('Please enter username and password');
+                return;
+            }
+
+            loginBtn.disabled = true;
+            loginBtn.classList.add('loading');
+            const btnSpan = loginBtn.querySelector('span');
+            const originalText = btnSpan.textContent;
+            btnSpan.textContent = 'Signing in...';
+
+            setTimeout(() => {
+                try {
+                    const user = Auth.login(username, password);
+
+                    if (user) {
+                        btnSpan.textContent = 'Success!';
+                        setTimeout(() => {
+                            window.location.href = 'dashboard.html';
+                        }, 300);
+                    } else {
+                        throw new Error('Invalid credentials');
+                    }
+                } catch (error) {
+                    showError('Invalid username or password');
+                    loginBtn.disabled = false;
+                    loginBtn.classList.remove('loading');
+                    btnSpan.textContent = originalText;
+                    passwordInput.value = '';
+                    passwordInput.focus();
+                }
+            }, 800);
+        });
+
+        function showError(message) {
+            errorAlert.textContent = '❌ ' + message;
+            errorAlert.style.display = 'block';
+            errorAlert.classList.add('show');
+        }
+
+        usernameInput.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                e.preventDefault();
+                passwordInput.focus();
+            }
+        });
+
+        passwordInput.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                loginForm.dispatchEvent(new Event('submit'));
+            }
+        });
+
+        window.addEventListener('load', () => {
+            usernameInput.focus();
+        });
+    </script>
+</body>
+</html>
