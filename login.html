@@ -3,560 +3,198 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Login - Student ID Card Generator</title>
-    
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        html, body {
-            width: 100%;
-            height: 100%;
-            overflow: hidden;
-        }
-
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            min-height: 100vh;
-        }
-
-        .login-wrapper {
-            display: flex;
-            width: 100%;
-            height: 100vh;
-            animation: fadeIn 0.6s ease-out;
-        }
-
-        /* Left side - Info */
-        .login-left {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: flex-end;
-            padding: 60px;
-            color: white;
-            animation: slideInLeft 0.8s ease-out;
-        }
-
-        .login-info {
-            max-width: 450px;
-        }
-
-        .login-info h1 {
-            font-size: 48px;
-            font-weight: 700;
-            margin-bottom: 20px;
-            line-height: 1.2;
-        }
-
-        .login-info p {
-            font-size: 16px;
-            opacity: 0.9;
-            line-height: 1.6;
-            margin-bottom: 30px;
-        }
-
-        .info-features {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-        }
-
-        .feature-item {
-            display: flex;
-            gap: 12px;
-            align-items: flex-start;
-        }
-
-        .feature-icon {
-            width: 24px;
-            height: 24px;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.2);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-shrink: 0;
-            margin-top: 2px;
-        }
-
-        .feature-icon svg {
-            width: 14px;
-            height: 14px;
-            stroke: white;
-        }
-
-        .feature-text {
-            font-size: 14px;
-            opacity: 0.95;
-        }
-
-        /* Right side - Login Form */
-        .login-right {
-            flex: 1;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 60px;
-            animation: slideInRight 0.8s ease-out;
-        }
-
-        .login-form-container {
-            background: white;
-            border-radius: 20px;
-            padding: 50px;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-            width: 100%;
-            max-width: 400px;
-            animation: slideUpForm 0.8s ease-out 0.2s both;
-        }
-
-        .login-header {
-            text-align: center;
-            margin-bottom: 40px;
-        }
-
-        .login-logo {
-            width: 60px;
-            height: 60px;
-            margin: 0 auto 20px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            animation: logoFloat 3s ease-in-out infinite;
-        }
-
-        .login-logo img {
-            width: 40px;
-            height: 40px;
-            object-fit: contain;
-        }
-
-        .login-header h2 {
-            font-size: 28px;
-            color: #333;
-            margin-bottom: 8px;
-            font-weight: 700;
-        }
-
-        .login-header p {
-            font-size: 14px;
-            color: #999;
-        }
-
-        .form-group {
-            margin-bottom: 22px;
-        }
-
-        .form-label {
-            display: block;
-            font-size: 13px;
-            font-weight: 600;
-            color: #333;
-            margin-bottom: 8px;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        .form-input {
-            width: 100%;
-            padding: 12px 16px;
-            border: 2px solid #e8e8e8;
-            border-radius: 10px;
-            font-size: 15px;
-            transition: all 0.3s ease;
-            font-family: inherit;
-        }
-
-        .form-input:focus {
-            outline: none;
-            border-color: #667eea;
-            background: #f8f8ff;
-            box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.1);
-        }
-
-        .form-input::placeholder {
-            color: #ccc;
-        }
-
-        .login-btn {
-            width: 100%;
-            padding: 14px 20px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            border: none;
-            border-radius: 10px;
-            font-size: 15px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-top: 10px;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .login-btn::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: rgba(255, 255, 255, 0.1);
-            transition: left 0.3s ease;
-        }
-
-        .login-btn:hover::before {
-            left: 100%;
-        }
-
-        .login-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.3);
-        }
-
-        .login-btn:active {
-            transform: translateY(0);
-        }
-
-        .login-btn.loading {
-            pointer-events: none;
-            opacity: 0.7;
-        }
-
-        .login-btn.loading::after {
-            content: '';
-            position: absolute;
-            width: 16px;
-            height: 16px;
-            right: 16px;
-            top: 50%;
-            margin-top: -8px;
-            border: 2px solid rgba(255, 255, 255, 0.3);
-            border-top-color: white;
-            border-radius: 50%;
-            animation: spin 0.8s linear infinite;
-        }
-
-        .error-message {
-            display: none;
-            background: #fee;
-            color: #c33;
-            padding: 12px 16px;
-            border-radius: 10px;
-            margin-bottom: 20px;
-            font-size: 13px;
-            border-left: 4px solid #c33;
-            animation: shake 0.5s ease-out;
-        }
-
-        .error-message.show {
-            display: block;
-        }
-
-        .login-hint {
-            text-align: center;
-            margin-top: 24px;
-            font-size: 12px;
-            color: #999;
-        }
-
-        .login-hint strong {
-            color: #667eea;
-        }
-
-        /* Animations */
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-            }
-            to {
-                opacity: 1;
-            }
-        }
-
-        @keyframes slideInLeft {
-            from {
-                opacity: 0;
-                transform: translateX(-40px);
-            }
-            to {
-                opacity: 1;
-                transform: translateX(0);
-            }
-        }
-
-        @keyframes slideInRight {
-            from {
-                opacity: 0;
-                transform: translateX(40px);
-            }
-            to {
-                opacity: 1;
-                transform: translateX(0);
-            }
-        }
-
-        @keyframes slideUpForm {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        @keyframes logoFloat {
-            0%, 100% {
-                transform: translateY(0);
-            }
-            50% {
-                transform: translateY(-10px);
-            }
-        }
-
-        @keyframes shake {
-            0%, 100% {
-                transform: translateX(0);
-            }
-            10%, 30%, 50%, 70%, 90% {
-                transform: translateX(-5px);
-            }
-            20%, 40%, 60%, 80% {
-                transform: translateX(5px);
-            }
-        }
-
-        @keyframes spin {
-            from {
-                transform: rotate(0deg);
-            }
-            to {
-                transform: rotate(360deg);
-            }
-        }
-
-        /* Responsive */
-        @media (max-width: 1024px) {
-            .login-wrapper {
-                flex-direction: column;
-            }
-
-            .login-left {
-                padding: 40px 30px;
-                align-items: center;
-                text-align: center;
-            }
-
-            .login-right {
-                padding: 40px 30px;
-                min-height: auto;
-            }
-
-            .login-info h1 {
-                font-size: 32px;
-            }
-        }
-
-        @media (max-width: 768px) {
-            .login-left {
-                display: none;
-            }
-
-            .login-right {
-                flex: 1;
-                padding: 20px;
-            }
-
-            .login-form-container {
-                padding: 30px;
-            }
-
-            .login-header h2 {
-                font-size: 24px;
-            }
-
-            .login-info h1 {
-                font-size: 24px;
-            }
-        }
-
-        /* Success Animation */
-        @keyframes slideOutRight {
-            to {
-                opacity: 0;
-                transform: translateX(100px);
-            }
-        }
-
-        body.login-success {
-            animation: slideOutRight 0.6s ease-in forwards;
-        }
-    </style>
+    <title>Admin Login - St Soldier Group</title>
+    <link rel="stylesheet" href="assets/css/login.css">
 </head>
 <body>
-    <div class="login-wrapper">
-        <!-- Left Side - Info -->
+    <div class="login-container">
+        <!-- Left Side - Premium Design -->
         <div class="login-left">
-            <div class="login-info">
-                <h1>Welcome Back</h1>
-                <p>Manage student ID cards efficiently with our modern system.</p>
-                <div class="info-features">
-                    <div class="feature-item">
-                        <div class="feature-icon">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <polyline points="20 6 9 17 4 12"></polyline>
-                            </svg>
-                        </div>
-                        <div class="feature-text">Create professional ID cards instantly</div>
+            <div class="left-content">
+                <div class="premium-heading">
+                    <h1>Student ID Card<br><span class="gradient-text">Generator</span></h1>
+                    <p>Manage your institution's digital identity with ease and security</p>
+                </div>
+
+                <div class="premium-stats">
+                    <div class="stat">
+                        <div class="stat-number">50K+</div>
+                        <div class="stat-label">Cards Generated</div>
                     </div>
-                    <div class="feature-item">
-                        <div class="feature-icon">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <polyline points="20 6 9 17 4 12"></polyline>
-                            </svg>
-                        </div>
-                        <div class="feature-text">Download as PDF with one click</div>
+                    <div class="stat">
+                        <div class="stat-number">200+</div>
+                        <div class="stat-label">Institutions</div>
                     </div>
-                    <div class="feature-item">
-                        <div class="feature-icon">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <polyline points="20 6 9 17 4 12"></polyline>
-                            </svg>
+                    <div class="stat">
+                        <div class="stat-number">99.9%</div>
+                        <div class="stat-label">Uptime</div>
+                    </div>
+                </div>
+
+                <div class="premium-features">
+                    <div class="premium-feature">
+                        <div class="feature-icon">🔒</div>
+                        <div>
+                            <h3>Secure</h3>
+                            <p>Enterprise-grade security for your data</p>
                         </div>
-                        <div class="feature-text">Secure cloud storage with Google Sheets</div>
+                    </div>
+
+                    <div class="premium-feature">
+                        <div class="feature-icon">✨</div>
+                        <div>
+                            <h3>Professional</h3>
+                            <p>Beautiful card designs in minutes</p>
+                        </div>
+                    </div>
+
+                    <div class="premium-feature">
+                        <div class="feature-icon">⚡</div>
+                        <div>
+                            <h3>Fast & Easy</h3>
+                            <p>Intuitive interface for quick management</p>
+                        </div>
                     </div>
                 </div>
             </div>
+
+            <!-- Decorative Elements -->
+            <div class="decoration decoration-1"></div>
+            <div class="decoration decoration-2"></div>
+            <div class="decoration decoration-3"></div>
         </div>
 
-        <!-- Right Side - Login Form -->
+        <!-- Right Side - Clean Login Form -->
         <div class="login-right">
-            <div class="login-form-container">
-                <div class="login-header">
-                    <div class="login-logo">
-                        <img src="https://stsoldiergroup.com/wp-content/uploads/2025/09/st-soldier-logo.png" 
-                             alt="St Soldier Logo" onerror="this.style.display='none'">
-                    </div>
-                    <h2>Admin Login</h2>
-                    <p>St Soldier Group</p>
+            <div class="form-wrapper">
+                <div class="form-header">
+                    <h2>Welcome Back</h2>
+                    <p>Sign in to your admin account</p>
                 </div>
 
-                <form id="loginForm">
-                    <div class="error-message" id="loginError"></div>
+                <form id="loginForm" class="login-form">
+                    <div class="error-alert" id="errorAlert" style="display: none;"></div>
 
                     <div class="form-group">
-                        <label for="username" class="form-label">Username</label>
+                        <label for="username">Username</label>
                         <input 
                             type="text" 
                             id="username" 
-                            class="form-input"
-                            placeholder="Enter your username" 
+                            placeholder="admin"
                             autocomplete="off"
                             required>
                     </div>
 
                     <div class="form-group">
-                        <label for="password" class="form-label">Password</label>
-                        <input 
-                            type="password" 
-                            id="password" 
-                            class="form-input"
-                            placeholder="Enter your password" 
-                            autocomplete="off"
-                            required>
+                        <label for="password">Password</label>
+                        <div class="password-wrapper">
+                            <input 
+                                type="password" 
+                                id="password" 
+                                placeholder="••••••••"
+                                autocomplete="off"
+                                required>
+                            <button type="button" class="toggle-password" id="togglePassword">
+                                👁️
+                            </button>
+                        </div>
                     </div>
 
                     <button type="submit" class="login-btn" id="loginBtn">
-                        Sign In
+                        <span>Sign In</span>
                     </button>
                 </form>
 
-                <p class="login-hint">Demo Credentials: <strong>admin</strong> / <strong>admin123</strong></p>
+                <div class="demo-box">
+                    <p><strong>Demo:</strong> admin / admin123</p>
+                </div>
+
+                <div class="form-footer">
+                    <p>© 2025 St Soldier Group. All rights reserved.</p>
+                </div>
             </div>
         </div>
     </div>
 
-    <!-- Scripts - Correct Loading Order -->
     <script src="assets/js/config.js"></script>
     <script src="assets/js/cache.js"></script>
     <script src="assets/js/utils.js"></script>
     <script src="assets/js/auth.js"></script>
 
     <script>
-        // Check if already logged in
-        if (Auth.isAuthenticated()) {
+        // Redirect if already logged in
+        if (Auth && Auth.isAuthenticated && Auth.isAuthenticated()) {
             window.location.href = 'dashboard.html';
         }
 
         const loginForm = document.getElementById('loginForm');
         const loginBtn = document.getElementById('loginBtn');
-        const loginError = document.getElementById('loginError');
         const usernameInput = document.getElementById('username');
         const passwordInput = document.getElementById('password');
+        const togglePassword = document.getElementById('togglePassword');
+        const errorAlert = document.getElementById('errorAlert');
 
-        loginForm.addEventListener('submit', async function(e) {
+        // Toggle password visibility
+        togglePassword.addEventListener('click', function(e) {
+            e.preventDefault();
+            const type = passwordInput.type === 'password' ? 'text' : 'password';
+            passwordInput.type = type;
+            togglePassword.textContent = type === 'password' ? '👁️' : '🙈';
+        });
+
+        // Handle login
+        loginForm.addEventListener('submit', function(e) {
             e.preventDefault();
 
             const username = usernameInput.value.trim();
             const password = passwordInput.value.trim();
 
-            // Clear previous error
-            loginError.textContent = '';
-            loginError.classList.remove('show');
+            errorAlert.style.display = 'none';
+            errorAlert.textContent = '';
 
             if (!username || !password) {
                 showError('Please enter username and password');
                 return;
             }
 
-            // Show loading state
-            loginBtn.classList.add('loading');
             loginBtn.disabled = true;
+            loginBtn.classList.add('loading');
+            const btnSpan = loginBtn.querySelector('span');
+            const originalText = btnSpan.textContent;
+            btnSpan.textContent = 'Signing in...';
 
-            // Simulate slight delay for better UX
             setTimeout(() => {
-                const user = Auth.login(username, password);
+                try {
+                    const user = Auth.login(username, password);
 
-                if (user) {
-                    // Success animation
-                    document.body.classList.add('login-success');
-                    setTimeout(() => {
-                        window.location.href = 'dashboard.html';
-                    }, 600);
-                } else {
-                    // Error
+                    if (user) {
+                        btnSpan.textContent = 'Success!';
+                        setTimeout(() => {
+                            window.location.href = 'dashboard.html';
+                        }, 300);
+                    } else {
+                        throw new Error('Invalid credentials');
+                    }
+                } catch (error) {
                     showError('Invalid username or password');
-                    loginBtn.classList.remove('loading');
                     loginBtn.disabled = false;
+                    loginBtn.classList.remove('loading');
+                    btnSpan.textContent = originalText;
                     passwordInput.value = '';
                     passwordInput.focus();
                 }
-            }, 500);
+            }, 800);
         });
 
         function showError(message) {
-            loginError.textContent = message;
-            loginError.classList.add('show');
+            errorAlert.textContent = '❌ ' + message;
+            errorAlert.style.display = 'block';
+            errorAlert.classList.add('show');
         }
 
-        // Allow form submission with Enter key
         usernameInput.addEventListener('keypress', function(e) {
             if (e.key === 'Enter') {
+                e.preventDefault();
                 passwordInput.focus();
             }
         });
@@ -565,6 +203,10 @@
             if (e.key === 'Enter') {
                 loginForm.dispatchEvent(new Event('submit'));
             }
+        });
+
+        window.addEventListener('load', () => {
+            usernameInput.focus();
         });
     </script>
 </body>

@@ -1,9 +1,10 @@
 :root {
-    /* Colors */
-    --primary-color: #667eea;
-    --primary-dark: #764ba2;
-    --primary-light: #8b9cff;
-    --secondary-color: #f093fb;
+    /* Colors - St Soldier Group Branding */
+    --primary-color: #2d5016;
+    --primary-dark: #1a3009;
+    --primary-light: #3d6b1f;
+    --secondary-color: #f4a61a;
+    --accent-color: #e8702f;
     --success-color: #27ae60;
     --success-dark: #229954;
     --error-color: #e74c3c;
@@ -23,9 +24,9 @@
     --border-light: #f0f0f0;
     
     /* Gradients */
-    --gradient-primary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    --gradient-secondary: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-    --gradient-overlay: linear-gradient(135deg, rgba(102, 126, 234, 0.9) 0%, rgba(118, 75, 162, 0.9) 100%);
+    --gradient-primary: linear-gradient(135deg, #2d5016 0%, #1a3009 100%);
+    --gradient-secondary: linear-gradient(135deg, #f4a61a 0%, #e8702f 100%);
+    --gradient-overlay: linear-gradient(135deg, rgba(45, 80, 22, 0.9) 0%, rgba(26, 48, 9, 0.9) 100%);
     
     /* Shadows */
     --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.08);

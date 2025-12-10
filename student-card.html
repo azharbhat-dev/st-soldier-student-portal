@@ -4,351 +4,77 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Student ID Card Viewer">
-    <title>Student ID Card</title>
+    <title>Student ID Card - St Soldier Group</title>
     
-    <link rel="stylesheet" href="assets/css/reset.css">
-    <link rel="stylesheet" href="assets/css/variables.css">
-    <link rel="stylesheet" href="assets/css/base.css">
-    <link rel="stylesheet" href="assets/css/id-card.css">
-    <link rel="stylesheet" href="assets/css/responsive.css">
-
     <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #2d5016;
+            --primary-dark: #1a3009;
+            --secondary: #f4a61a;
+            --accent: #e8702f;
+            --text: #1a1a1a;
+            --text-light: #666;
+            --text-lighter: #999;
+            --border: #e0e0e0;
+            --bg: #ffffff;
+            --bg-light: #f8f9fa;
+        }
+
+        html, body {
+            width: 100%;
+            height: 100%;
+        }
+
         body {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #2d5016 0%, #1a3009 100%);
             min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
             padding: 20px;
             overflow-y: auto;
         }
 
-        .card-viewer-container {
-            width: 100%;
-            max-width: 1200px;
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
             animation: fadeIn 0.6s ease-out;
         }
 
-        .header {
-            text-align: center;
-            color: white;
-            margin-bottom: 40px;
-            animation: slideDown 0.8s ease-out;
-        }
-
-        .header-logo {
-            width: 80px;
-            height: 80px;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 50%;
-            margin: 0 auto 20px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            animation: logoFloat 3s ease-in-out infinite;
-        }
-
-        .header-logo img {
-            width: 60px;
-            height: 60px;
-            object-fit: contain;
-        }
-
-        .header h1 {
-            font-size: 36px;
-            font-weight: 700;
-            margin-bottom: 8px;
-        }
-
-        .header p {
-            font-size: 16px;
-            opacity: 0.9;
-        }
-
-        .main-content {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 30px;
-            margin-bottom: 30px;
-        }
-
-        .card-section {
-            background: white;
-            border-radius: 20px;
-            padding: 40px;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-            animation: slideUpLeft 0.8s ease-out 0.1s both;
-        }
-
-        .input-section {
-            animation: slideUpRight 0.8s ease-out 0.2s both;
-        }
-
-        .section-title {
-            font-size: 24px;
-            font-weight: 700;
-            color: #667eea;
-            margin-bottom: 25px;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-
-        .section-title svg {
-            width: 28px;
-            height: 28px;
-        }
-
-        .form-group {
-            margin-bottom: 20px;
-        }
-
-        .form-label {
-            display: block;
-            font-size: 13px;
-            font-weight: 600;
-            color: #333;
-            margin-bottom: 8px;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        .form-input {
-            width: 100%;
-            padding: 12px 16px;
-            border: 2px solid #e8e8e8;
-            border-radius: 10px;
-            font-size: 15px;
-            transition: all 0.3s ease;
-            font-family: 'Courier New', monospace;
-            font-weight: 500;
-        }
-
-        .form-input:focus {
-            outline: none;
-            border-color: #667eea;
-            background: #f8f8ff;
-            box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.1);
-        }
-
-        .btn-group {
-            display: flex;
-            gap: 12px;
-            margin-top: 25px;
-        }
-
-        .btn {
-            flex: 1;
-            padding: 14px 20px;
-            border: none;
-            border-radius: 10px;
-            font-weight: 600;
-            font-size: 14px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        .btn-primary {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-        }
-
-        .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.3);
-        }
-
-        .btn-secondary {
-            background: #f0f0f0;
-            color: #333;
-            border: 2px solid #e8e8e8;
-        }
-
-        .btn-secondary:hover {
-            background: #e8e8e8;
-            border-color: #667eea;
-        }
-
-        .btn svg {
-            width: 16px;
-            height: 16px;
-        }
-
-        .samples {
-            background: #f8f8f8;
-            border-radius: 12px;
-            padding: 20px;
-            margin-top: 25px;
-        }
-
-        .samples-title {
-            font-size: 13px;
-            font-weight: 700;
-            color: #667eea;
-            margin-bottom: 15px;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        .sample-item {
-            background: white;
-            padding: 12px 16px;
-            border-radius: 8px;
-            margin-bottom: 10px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            border-left: 4px solid #667eea;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .sample-item:hover {
-            transform: translateX(5px);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-        }
-
-        .sample-info {
-            flex: 1;
-        }
-
-        .sample-name {
-            font-weight: 600;
-            color: #333;
-            margin-bottom: 3px;
-            font-size: 13px;
-        }
-
-        .sample-id {
-            font-size: 11px;
-            color: #999;
-            font-family: 'Courier New', monospace;
-        }
-
-        .sample-copy {
-            background: #f0f0f0;
-            border: none;
-            padding: 8px 12px;
-            border-radius: 6px;
-            cursor: pointer;
-            font-size: 12px;
-            transition: all 0.3s ease;
-            margin-left: 10px;
-        }
-
-        .sample-copy:hover {
-            background: #667eea;
-            color: white;
-        }
-
-        .card-display {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            min-height: 400px;
-            background: linear-gradient(135deg, #f8f8ff 0%, #fff 100%);
-            border-radius: 15px;
-            overflow: hidden;
-        }
-
-        .id-card {
-            animation: scaleIn 0.6s ease-out;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-        }
-
-        .card-loading {
-            text-align: center;
-            color: #999;
-        }
-
-        .spinner {
-            width: 40px;
-            height: 40px;
-            border: 4px solid #e8e8e8;
-            border-top-color: #667eea;
-            border-radius: 50%;
-            animation: spin 0.8s linear infinite;
-            margin: 0 auto 15px;
-        }
-
-        .error-state {
-            text-align: center;
-            padding: 40px;
-        }
-
-        .error-icon {
-            font-size: 48px;
-            margin-bottom: 15px;
-        }
-
-        .error-text {
-            color: #666;
-            font-size: 16px;
-            margin-bottom: 10px;
-        }
-
-        .error-hint {
-            color: #999;
-            font-size: 13px;
-            line-height: 1.6;
-        }
-
-        .action-buttons {
-            display: flex;
-            gap: 12px;
-            margin-top: 25px;
-            flex-wrap: wrap;
-        }
-
-        .action-btn {
-            padding: 10px 16px;
-            border: 2px solid white;
-            background: transparent;
-            color: white;
-            border-radius: 8px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            font-size: 13px;
-        }
-
-        .action-btn:hover {
-            background: white;
-            color: #667eea;
-            transform: translateY(-2px);
-        }
-
-        .action-btn svg {
-            width: 16px;
-            height: 16px;
-        }
-
-        .footer {
-            text-align: center;
-            color: white;
-            font-size: 13px;
-            opacity: 0.8;
-            margin-top: 30px;
-        }
-
-        .footer p {
-            margin-bottom: 8px;
-        }
-
-        /* Animations */
         @keyframes fadeIn {
             from { opacity: 0; }
             to { opacity: 1; }
+        }
+
+        /* Logo Section */
+        .logo-section {
+            text-align: center;
+            margin-bottom: 40px;
+            animation: slideDown 0.6s ease-out;
+        }
+
+        .logo-img {
+            width: 100px;
+            height: 100px;
+            margin-bottom: 20px;
+            filter: brightness(1.2) drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3));
+        }
+
+        .logo-section h1 {
+            font-size: 32px;
+            color: white;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .logo-section p {
+            font-size: 16px;
+            color: #f4a61a;
+            font-weight: 600;
         }
 
         @keyframes slideDown {
@@ -362,32 +88,81 @@
             }
         }
 
-        @keyframes slideUpLeft {
+        /* Main Grid */
+        .main-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        /* Card Display Section */
+        .card-section {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            animation: slideUp 0.6s ease-out 0.1s both;
+        }
+
+        @keyframes slideUp {
             from {
                 opacity: 0;
-                transform: translateX(-30px) translateY(30px);
+                transform: translateY(30px);
             }
             to {
                 opacity: 1;
-                transform: translateX(0) translateY(0);
+                transform: translateY(0);
             }
         }
 
-        @keyframes slideUpRight {
-            from {
-                opacity: 0;
-                transform: translateX(30px) translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateX(0) translateY(0);
-            }
+        .section-title {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .section-title svg {
+            width: 24px;
+            height: 24px;
+        }
+
+        /* ID Card Display - MATCHES ADMIN PORTAL */
+        .card-display {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 280px;
+            background: linear-gradient(135deg, #f5f5f5 0%, #fff 100%);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        /* ID Card - EXACT SAME AS ADMIN */
+        .id-card {
+            width: 380px;
+            height: 220px;
+            background: linear-gradient(135deg, #ffffff 0%, #f5f5f5 100%);
+            border: 2px solid var(--primary);
+            border-radius: 12px;
+            box-shadow: 0 15px 40px rgba(45, 80, 22, 0.25);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            animation: scaleIn 0.4s ease-out;
+            font-family: 'Segoe UI', sans-serif;
         }
 
         @keyframes scaleIn {
             from {
                 opacity: 0;
-                transform: scale(0.9);
+                transform: scale(0.95);
             }
             to {
                 opacity: 1;
@@ -395,9 +170,265 @@
             }
         }
 
-        @keyframes logoFloat {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-15px); }
+        /* Green Header */
+        .id-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 75px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            z-index: 1;
+        }
+
+        /* Golden Stripe */
+        .id-card::after {
+            content: '';
+            position: absolute;
+            top: 73px;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(90deg, var(--secondary) 0%, var(--accent) 100%);
+            z-index: 1;
+        }
+
+        .card-header {
+            position: relative;
+            z-index: 2;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px 16px;
+            height: 75px;
+            gap: 12px;
+        }
+
+        .card-logo {
+            height: 60px;
+            width: auto;
+            object-fit: contain;
+            filter: brightness(1.05) drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
+        }
+
+        .card-title {
+            color: white;
+            text-align: center;
+            flex: 1;
+            padding: 0 10px;
+        }
+
+        .card-title h4 {
+            font-size: 13px;
+            font-weight: 700;
+            margin: 0;
+            letter-spacing: 1.2px;
+            text-transform: uppercase;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .card-title p {
+            font-size: 9px;
+            margin: 3px 0 0 0;
+            font-weight: 500;
+            color: #f4a61a;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+        }
+
+        .card-body {
+            position: relative;
+            z-index: 1;
+            padding: 14px 16px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px 15px;
+            font-size: 12px;
+            background: white;
+            flex: 1;
+            overflow: hidden;
+        }
+
+        .card-field {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+
+        .card-label {
+            font-weight: 700;
+            color: var(--primary);
+            font-size: 8px;
+            text-transform: uppercase;
+            letter-spacing: 0.6px;
+            line-height: 1;
+        }
+
+        .card-value {
+            color: #1a1a1a;
+            font-size: 10px;
+            font-weight: 600;
+            line-height: 1.2;
+            word-break: break-word;
+        }
+
+        /* Full Width ID Section */
+        .card-id {
+            grid-column: 1 / -1;
+            text-align: center;
+            border-top: 1px dashed var(--primary);
+            padding-top: 8px;
+            margin-top: 4px;
+        }
+
+        .card-id .card-label {
+            margin-bottom: 2px;
+            color: #f4a61a;
+        }
+
+        .card-id .card-value {
+            font-size: 12px;
+            font-weight: 700;
+            color: var(--primary);
+            letter-spacing: 1px;
+            font-family: 'Courier New', monospace;
+        }
+
+        /* Input Section */
+        .input-section {
+            animation: slideUp 0.6s ease-out 0.2s both;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-label {
+            display: block;
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 12px 16px;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-size: 15px;
+            font-family: inherit;
+            transition: all 0.3s ease;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: var(--primary);
+            background: #f8faf5;
+            box-shadow: 0 0 0 4px rgba(45, 80, 22, 0.1);
+        }
+
+        .form-input::placeholder {
+            color: #ccc;
+        }
+
+        /* Buttons */
+        .btn-group {
+            display: flex;
+            gap: 12px;
+            margin-top: 20px;
+        }
+
+        .btn {
+            flex: 1;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 10px;
+            font-weight: 600;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(45, 80, 22, 0.3);
+        }
+
+        .btn-secondary {
+            background: var(--bg-light);
+            color: var(--text);
+            border: 2px solid #e0e0e0;
+        }
+
+        .btn-secondary:hover {
+            background: #e0e0e0;
+            border-color: var(--primary);
+        }
+
+        .btn svg {
+            width: 16px;
+            height: 16px;
+        }
+
+        /* Demo Info */
+        .demo-info {
+            background: #f0f8f0;
+            border-left: 4px solid var(--secondary);
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 20px;
+        }
+
+        .demo-info h4 {
+            color: var(--primary);
+            font-size: 12px;
+            font-weight: 700;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+        }
+
+        .demo-item {
+            font-size: 13px;
+            color: var(--text-light);
+            margin: 6px 0;
+            font-family: 'Courier New', monospace;
+        }
+
+        .demo-item strong {
+            color: var(--primary);
+            font-weight: 600;
+        }
+
+        /* Loading & Error States */
+        .card-loading,
+        .error-state {
+            text-align: center;
+            padding: 40px 20px;
+            color: var(--text-lighter);
+        }
+
+        .spinner {
+            width: 40px;
+            height: 40px;
+            border: 4px solid #e0e0e0;
+            border-top-color: var(--primary);
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+            margin: 0 auto 15px;
         }
 
         @keyframes spin {
@@ -405,67 +436,171 @@
             to { transform: rotate(360deg); }
         }
 
+        .error-icon {
+            font-size: 48px;
+            margin-bottom: 15px;
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            color: white;
+            font-size: 13px;
+            opacity: 0.8;
+            margin-top: 40px;
+        }
+
         /* Responsive */
         @media (max-width: 1024px) {
             .main-content {
                 grid-template-columns: 1fr;
-            }
-
-            .header h1 {
-                font-size: 28px;
+                gap: 20px;
             }
         }
 
         @media (max-width: 768px) {
-            .card-viewer-container {
-                padding: 0 10px;
+            body {
+                padding: 15px;
+            }
+
+            .logo-img {
+                width: 80px;
+                height: 80px;
+            }
+
+            .logo-section h1 {
+                font-size: 24px;
             }
 
             .card-section {
-                padding: 25px;
+                padding: 20px;
             }
 
-            .header {
-                margin-bottom: 25px;
+            .card-display {
+                min-height: 250px;
+                padding: 15px;
             }
 
-            .main-content {
-                gap: 20px;
+            .id-card {
+                width: 100%;
+                max-width: 380px;
+                height: auto;
+                aspect-ratio: 380 / 220;
             }
 
-            .section-title {
-                font-size: 20px;
+            .btn-group {
+                flex-direction: column;
+            }
+
+            .btn {
+                width: 100%;
             }
         }
 
-        .hidden {
-            display: none !important;
+        @media (max-width: 480px) {
+            body {
+                padding: 10px;
+            }
+
+            .logo-img {
+                width: 70px;
+                height: 70px;
+                margin-bottom: 15px;
+            }
+
+            .logo-section h1 {
+                font-size: 20px;
+            }
+
+            .card-section {
+                padding: 15px;
+            }
+
+            .section-title {
+                font-size: 16px;
+                margin-bottom: 15px;
+            }
+
+            .card-display {
+                min-height: 220px;
+                padding: 10px;
+            }
+
+            .form-input {
+                font-size: 16px;
+            }
+
+            .btn {
+                padding: 10px 16px;
+                font-size: 12px;
+            }
+
+            .demo-info {
+                padding: 12px;
+                margin-top: 15px;
+            }
+
+            .demo-info h4 {
+                font-size: 11px;
+            }
+
+            .footer {
+                font-size: 12px;
+                margin-top: 30px;
+            }
+        }
+
+        @media print {
+            body {
+                background: white;
+            }
+
+            .logo-section,
+            .card-section:nth-child(2),
+            .footer {
+                display: none;
+            }
+
+            .main-content {
+                display: block;
+                margin: 0;
+            }
+
+            .card-section {
+                box-shadow: none;
+                padding: 0;
+                background: none;
+            }
+
+            .card-display {
+                background: transparent;
+                min-height: auto;
+                padding: 0;
+            }
         }
     </style>
 </head>
 <body>
-    <div class="card-viewer-container">
-        <!-- Header -->
-        <div class="header">
-            <div class="header-logo">
-                <img src="https://stsoldiergroup.com/wp-content/uploads/2025/09/st-soldier-logo.png" 
-                     alt="St Soldier Logo" onerror="this.style.display='none'">
-            </div>
+    <div class="container">
+        <!-- Logo Section -->
+        <div class="logo-section">
+            <img src="https://stsoldiergroup.com/wp-content/uploads/2025/09/st-soldier-logo.png" 
+                 alt="Logo" class="logo-img">
             <h1>Student ID Card</h1>
             <p>St Soldier Group of Institutions</p>
         </div>
 
         <!-- Main Content -->
         <div class="main-content">
-            <!-- Left: Card Display -->
+            <!-- Card Display -->
             <div class="card-section">
-                <div class="section-title">
+                <h2 class="section-title">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect>
                         <path d="M16 5V3a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"></path>
                     </svg>
                     Your ID Card
-                </div>
+                </h2>
 
                 <div class="card-display" id="cardDisplay">
                     <div class="card-loading">
@@ -474,16 +609,15 @@
                     </div>
                 </div>
 
-                <div class="action-buttons" id="actionButtons" style="display: none;">
-                    <button class="action-btn" onclick="printCard()">
+                <div class="btn-group" id="actionButtons" style="display: none;">
+                    <button class="btn btn-secondary" onclick="printCard()">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                             <polyline points="6 9 6 2 18 2 18 9"></polyline>
                             <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path>
-                            <rect x="6" y="14" width="12" height="8"></rect>
                         </svg>
                         Print
                     </button>
-                    <button class="action-btn" onclick="downloadPDF()">
+                    <button class="btn btn-primary" onclick="downloadCard()">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                             <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
                             <polyline points="7 10 12 15 17 10"></polyline>
@@ -494,15 +628,15 @@
                 </div>
             </div>
 
-            <!-- Right: Input & Samples -->
+            <!-- Input Section -->
             <div class="card-section input-section">
-                <div class="section-title">
+                <h2 class="section-title">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <circle cx="12" cy="12" r="1"></circle>
                         <path d="M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z"></path>
                     </svg>
                     View Your Card
-                </div>
+                </h2>
 
                 <div class="form-group">
                     <label class="form-label">Student ID</label>
@@ -510,7 +644,7 @@
                         type="text" 
                         id="studentIdInput" 
                         class="form-input"
-                        placeholder="STUMIYURAZRGVA8B"
+                        placeholder="Enter student ID"
                         autocomplete="off">
                 </div>
 
@@ -521,7 +655,7 @@
                             <polyline points="17 8 12 3 7 8"></polyline>
                             <line x1="12" y1="3" x2="12" y2="15"></line>
                         </svg>
-                        Load Card
+                        Load
                     </button>
                     <button class="btn btn-secondary" onclick="clearCard()">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -532,37 +666,16 @@
                     </button>
                 </div>
 
-                <div class="samples">
-                    <div class="samples-title">📋 Sample IDs (For Testing)</div>
-                    <div class="sample-item" onclick="loadStudentId('STUMIYURAZRGVA8B')">
-                        <div class="sample-info">
-                            <div class="sample-name">Aditya Kumar</div>
-                            <div class="sample-id">STUMIYURAZRGVA8B</div>
-                        </div>
-                        <button class="sample-copy" onclick="event.stopPropagation(); copyToClipboard('STUMIYURAZRGVA8B')">Copy</button>
-                    </div>
-                    <div class="sample-item" onclick="loadStudentId('STUMIYURAZ2SXCD')">
-                        <div class="sample-info">
-                            <div class="sample-name">Priya Singh</div>
-                            <div class="sample-id">STUMIYURAZ2SXCD</div>
-                        </div>
-                        <button class="sample-copy" onclick="event.stopPropagation(); copyToClipboard('STUMIYURAZ2SXCD')">Copy</button>
-                    </div>
-                    <div class="sample-item" onclick="loadStudentId('STUMIYURAZ3EFGH')">
-                        <div class="sample-info">
-                            <div class="sample-name">Rajesh Patel</div>
-                            <div class="sample-id">STUMIYURAZ3EFGH</div>
-                        </div>
-                        <button class="sample-copy" onclick="event.stopPropagation(); copyToClipboard('STUMIYURAZ3EFGH')">Copy</button>
-                    </div>
+                <div class="demo-info">
+                    <h4>📋 Test with Sample ID</h4>
+                    <div class="demo-item"><strong>ID:</strong> STUMIYURAZRGVA8B</div>
                 </div>
             </div>
         </div>
 
         <!-- Footer -->
         <div class="footer">
-            <p>Share your card: Copy your ID and send the URL to anyone</p>
-            <p style="font-size: 12px; opacity: 0.6;">St Soldier Group of Institutions © 2025</p>
+            <p>St Soldier Group of Institutions © 2025</p>
         </div>
     </div>
 
@@ -571,21 +684,6 @@
     <script src="assets/js/utils.js"></script>
 
     <script>
-        // Get student ID from URL on page load
-        window.addEventListener('load', () => {
-            const urlParams = new URLSearchParams(window.location.search);
-            const id = urlParams.get('id');
-            if (id) {
-                document.getElementById('studentIdInput').value = id;
-                loadCard();
-            }
-        });
-
-        function loadStudentId(id) {
-            document.getElementById('studentIdInput').value = id;
-            loadCard();
-        }
-
         function loadCard() {
             const studentId = document.getElementById('studentIdInput').value.trim();
             
@@ -612,8 +710,8 @@
             document.getElementById('cardDisplay').innerHTML = `
                 <div class="error-state">
                     <div class="error-icon">❌</div>
-                    <div class="error-text">Unable to Load Card</div>
-                    <div class="error-hint">${message}</div>
+                    <div style="margin-bottom: 10px; font-weight: 600;">Unable to Load Card</div>
+                    <div style="font-size: 13px;">${message}</div>
                 </div>
             `;
             document.getElementById('actionButtons').style.display = 'none';
@@ -621,7 +719,7 @@
 
         async function loadCardData(studentId) {
             try {
-                // Try to load from Google Apps Script if configured
+                // Try API first if configured
                 if (typeof CONFIG !== 'undefined' && CONFIG.API && CONFIG.API.BASE_URL && CONFIG.API.BASE_URL.includes('script.google.com')) {
                     const response = await fetch(CONFIG.API.BASE_URL, {
                         method: 'POST',
@@ -639,58 +737,10 @@
                     }
                 }
 
-                // Fallback: Use test data
-                const testStudents = {
-                    'STUMIYURAZRGVA8B': {
-                        id: 'STUMIYURAZRGVA8B',
-                        name: 'Aditya Kumar',
-                        fatherName: 'Rajesh Kumar',
-                        rollNo: 'CS001',
-                        course: 'B.Tech (Computer Science)',
-                        semester: '1',
-                        email: 'aditya@example.com'
-                    },
-                    'STUMIYURAZ2SXCD': {
-                        id: 'STUMIYURAZ2SXCD',
-                        name: 'Priya Singh',
-                        fatherName: 'Vikram Singh',
-                        rollNo: 'CS002',
-                        course: 'B.Tech (Computer Science)',
-                        semester: '1',
-                        email: 'priya@example.com'
-                    },
-                    'STUMIYURAZ3EFGH': {
-                        id: 'STUMIYURAZ3EFGH',
-                        name: 'Rajesh Patel',
-                        fatherName: 'Hemant Patel',
-                        rollNo: 'CS003',
-                        course: 'B.Tech (Computer Science)',
-                        semester: '1',
-                        email: 'rajesh@example.com'
-                    }
-                };
-
-                if (testStudents[studentId]) {
-                    displayCard(testStudents[studentId]);
-                    window.currentStudent = testStudents[studentId];
-                } else {
-                    showError('Student ID not found. Try one of the sample IDs.');
-                }
+                showError('Student ID not found. Try: STUMIYURAZRGVA8B');
             } catch (error) {
-                console.error('Error loading card:', error);
-                
-                // Show sample anyway
-                const sampleStudent = {
-                    id: studentId,
-                    name: 'Test Student',
-                    fatherName: 'Test Father',
-                    rollNo: 'TEST001',
-                    course: 'B.Tech (Computer Science)',
-                    semester: '1',
-                    email: 'test@example.com'
-                };
-                displayCard(sampleStudent);
-                window.currentStudent = sampleStudent;
+                showError('Error loading card. Please try again.');
+                console.error(error);
             }
         }
 
@@ -698,7 +748,8 @@
             const cardHTML = `
                 <div class="id-card">
                     <div class="card-header">
-                        <img src="https://stsoldiergroup.com/wp-content/uploads/2025/09/st-soldier-logo.png" alt="Logo" class="card-logo">
+                        <img src="https://stsoldiergroup.com/wp-content/uploads/2025/09/st-soldier-logo.png" 
+                             alt="Logo" class="card-logo">
                         <div class="card-title">
                             <h4>ST SOLDIER GROUP</h4>
                             <p>STUDENT ID CARD</p>
@@ -707,27 +758,27 @@
                     <div class="card-body">
                         <div class="card-field">
                             <span class="card-label">Name</span>
-                            <span class="card-value">${escapeHtml(student.name)}</span>
-                        </div>
-                        <div class="card-field">
-                            <span class="card-label">Father's Name</span>
-                            <span class="card-value">${escapeHtml(student.fatherName)}</span>
+                            <span class="card-value">${escapeHtml(student.name || 'N/A')}</span>
                         </div>
                         <div class="card-field">
                             <span class="card-label">Roll No</span>
-                            <span class="card-value">${escapeHtml(student.rollNo)}</span>
+                            <span class="card-value">${escapeHtml(student.rollNo || 'N/A')}</span>
+                        </div>
+                        <div class="card-field">
+                            <span class="card-label">Father's Name</span>
+                            <span class="card-value">${escapeHtml(student.fatherName || 'N/A')}</span>
                         </div>
                         <div class="card-field">
                             <span class="card-label">Course</span>
-                            <span class="card-value">${escapeHtml(student.course)}</span>
+                            <span class="card-value">${escapeHtml(student.course || 'N/A')}</span>
                         </div>
                         <div class="card-field">
                             <span class="card-label">Semester</span>
-                            <span class="card-value">${escapeHtml(student.semester)}</span>
+                            <span class="card-value">${escapeHtml(student.semester || 'N/A')}</span>
                         </div>
                         <div class="card-field">
                             <span class="card-label">Email</span>
-                            <span class="card-value">${escapeHtml(student.email)}</span>
+                            <span class="card-value">${escapeHtml(student.email || 'N/A')}</span>
                         </div>
                         <div class="card-id">
                             <div class="card-label">Student ID</div>
@@ -736,19 +787,10 @@
                     </div>
                 </div>
             `;
+            
             document.getElementById('cardDisplay').innerHTML = cardHTML;
             document.getElementById('actionButtons').style.display = 'flex';
-        }
-
-        function escapeHtml(text) {
-            const map = {
-                '&': '&amp;',
-                '<': '&lt;',
-                '>': '&gt;',
-                '"': '&quot;',
-                "'": '&#039;'
-            };
-            return String(text).replace(/[&<>"']/g, m => map[m]);
+            window.currentStudent = student;
         }
 
         function clearCard() {
@@ -766,18 +808,58 @@
             window.print();
         }
 
-        function downloadPDF() {
-            if (!window.currentStudent) return;
-            alert('PDF download feature available when connected to backend!\nFor now, use Print → Save as PDF');
+        function downloadCard() {
+            if (!window.currentStudent) {
+                alert('Please load a student card first');
+                return;
+            }
+
+            // Check if html2pdf library is available
+            if (typeof html2pdf === 'undefined') {
+                // Load html2pdf library
+                const script = document.createElement('script');
+                script.src = 'https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js';
+                script.onload = generatePDF;
+                document.head.appendChild(script);
+            } else {
+                generatePDF();
+            }
         }
 
-        function copyToClipboard(text) {
-            navigator.clipboard.writeText(text);
+        function generatePDF() {
+            const element = document.getElementById('cardDisplay').querySelector('.id-card');
+            const opt = {
+                margin: 10,
+                filename: `Student-ID-${window.currentStudent.id}.pdf`,
+                image: { type: 'jpeg', quality: 0.98 },
+                html2canvas: { scale: 2 },
+                jsPDF: { orientation: 'landscape', unit: 'mm', format: [216, 137] }
+            };
+            html2pdf().set(opt).from(element).save();
+        }
+
+        function escapeHtml(text) {
+            const map = {
+                '&': '&amp;',
+                '<': '&lt;',
+                '>': '&gt;',
+                '"': '&quot;',
+                "'": '&#039;'
+            };
+            return String(text).replace(/[&<>"']/g, m => map[m]);
         }
 
         // Enter key support
         document.getElementById('studentIdInput').addEventListener('keypress', (e) => {
-            if (e.key === 'Enter') loadCard();
+            if (e.key === 'Enter') {
+                e.preventDefault();
+                loadCard();
+            }
+        });
+
+        // Auto-focus input
+        window.addEventListener('load', () => {
+            document.getElementById('studentIdInput').focus();
         });
     </script>
 </body>
