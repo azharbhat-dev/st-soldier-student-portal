@@ -8,7 +8,6 @@
 </head>
 <body>
     <div class="login-container">
-        <!-- Left Side - Premium Design -->
         <div class="login-left">
             <div class="left-content">
                 <div class="premium-heading">
@@ -33,7 +32,7 @@
 
                 <div class="premium-features">
                     <div class="premium-feature">
-                        <div class="feature-icon">🔒</div>
+                        <div class="feature-icon">Secure</div>
                         <div>
                             <h3>Secure</h3>
                             <p>Enterprise-grade security for your data</p>
@@ -41,7 +40,7 @@
                     </div>
 
                     <div class="premium-feature">
-                        <div class="feature-icon">✨</div>
+                        <div class="feature-icon">Professional</div>
                         <div>
                             <h3>Professional</h3>
                             <p>Beautiful card designs in minutes</p>
@@ -49,7 +48,7 @@
                     </div>
 
                     <div class="premium-feature">
-                        <div class="feature-icon">⚡</div>
+                        <div class="feature-icon">Fast</div>
                         <div>
                             <h3>Fast & Easy</h3>
                             <p>Intuitive interface for quick management</p>
@@ -58,13 +57,11 @@
                 </div>
             </div>
 
-            <!-- Decorative Elements -->
             <div class="decoration decoration-1"></div>
             <div class="decoration decoration-2"></div>
             <div class="decoration decoration-3"></div>
         </div>
 
-        <!-- Right Side - Clean Login Form -->
         <div class="login-right">
             <div class="form-wrapper">
                 <div class="form-header">
@@ -95,7 +92,7 @@
                                 autocomplete="off"
                                 required>
                             <button type="button" class="toggle-password" id="togglePassword">
-                                👁️
+                                Show
                             </button>
                         </div>
                     </div>
@@ -122,7 +119,6 @@
     <script src="assets/js/auth.js"></script>
 
     <script>
-        // Redirect if already logged in
         if (Auth && Auth.isAuthenticated && Auth.isAuthenticated()) {
             window.location.href = 'dashboard.html';
         }
@@ -134,15 +130,13 @@
         const togglePassword = document.getElementById('togglePassword');
         const errorAlert = document.getElementById('errorAlert');
 
-        // Toggle password visibility
         togglePassword.addEventListener('click', function(e) {
             e.preventDefault();
             const type = passwordInput.type === 'password' ? 'text' : 'password';
             passwordInput.type = type;
-            togglePassword.textContent = type === 'password' ? '👁️' : '🙈';
+            togglePassword.textContent = type === 'password' ? 'Show' : 'Hide';
         });
 
-        // Handle login
         loginForm.addEventListener('submit', function(e) {
             e.preventDefault();
 
@@ -187,7 +181,7 @@
         });
 
         function showError(message) {
-            errorAlert.textContent = '❌ ' + message;
+            errorAlert.textContent = 'Error: ' + message;
             errorAlert.style.display = 'block';
             errorAlert.classList.add('show');
         }
